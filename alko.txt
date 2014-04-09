@@ -2946,4 +2946,4 @@ Numero	Nimi	Valmistaja	Pullokoko	Hinta	Litrahinta	Uutuus	Hinnastojärjestyskoodi
 834035	Wine Atlas Of Australia 			67,00			900	tarvikkeet											James Hallidayn englanninkielinen arvostettu ja kattava Australian viinien, viinintuottajien ja viinialueiden opas.										tarvikevalikoima
 834145	Wineboy Elegant big cooler 			55,00			900	tarvikkeet											Akryylinen tarjoilucooler, johon sopii 5 kuohuviinipulloa tai 5–6 viinipulloa. Värit: kirkas ja musta. Vetoisuus: 13,5 l.										tarvikevalikoima
 834144	Wineboy Soul cooler 			24,00			900	tarvikkeet											Tarjoulucooler samppanjapullolle. Materiaali: kirkas, kiillotettu akryyli. Vetoisuus: 5,25 l.										tarvikevalikoima
-833129	Värikäs Boolikirja 			9,00			900	tarvik
+833129	Värikäs Boolikirja 			9,00			900	tarvikkeet											72 sivuinen kirja sisältää 116 booli- ja glögireseptiä sekä 21 klassikkodrinkkiä.										tarvikevalikoima
