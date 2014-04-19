@@ -11,7 +11,7 @@ block content
 
 		.row
 			.col-md-12
-				table.table-striped
+				table#results-table.table.table-striped
 					thead
 						tr
 							td Nimi:
@@ -19,3 +19,47 @@ block content
 							td Hinta:
 							td Alkoholi-%
 					tbody#results
+
+	div(tabindex='-1', role='dialog', aria-labelledby='productModalLabel', aria-hidden='true').modal.fade#product-modal
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button(type='button', data-dismiss='modal', aria-hidden='true').close &times;
+					h4.modal-title#product-title
+
+				.modal-body
+
+					img#product-image.img-thumbnail.product-image
+
+					p#product-description
+
+					p.product-price
+					p.product-metrics
+					p.product-type
+					p.product-group
+					p.product-area
+
+					dl.dl-horizontal
+						dt Tuotenumero:
+						dd.number
+
+						dt Alkoholi:
+						dd.alcohol
+
+						dt Alkoholia / e:
+						dd.alcoholpere
+
+						dt Pakkaus:
+						dd.package
+
+						dt Pakkauskoko:
+						dd.packagesize
+
+						dt Korkki:
+						dd.cork
+
+					
+				.clearfix
+
+				.modal-footer
+					button(type='button', data-dismiss='modal').btn.btn-default Sulje
