@@ -27,7 +27,7 @@ var getProducts = function(callback) {
 				// remove the couple first lines of text as well as quotation marks
 				rl.on('line', function(line) {
 					if (index > 2) {
-						line = line.replace(/"/g, '');
+						line = line.replace(/"/g, '').replace(/-%/g, '');
 						output.write(line + '\n');
 					}
 					index++;
