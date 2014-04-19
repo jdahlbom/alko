@@ -1,7 +1,21 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		block head
+			block title
+				title Program Name
+			block meta
+				meta(name='description', content='')
+				meta(name='keywords', content='')
+			link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+			link(rel='stylesheet', href='/stylesheets/style.css')
+			| <style>
+			| body { padding-top: 60px; }
+			| </style>
+
+	body
+		include header
+
+		block content
+
+		include footer
