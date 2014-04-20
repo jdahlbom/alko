@@ -105,6 +105,7 @@ var Alko = {
 		}
 
 		document.getElementById('results').appendChild(fragment);
+		utils.bindEvents();
 
 	}
 
@@ -140,6 +141,32 @@ var utils = {
 
 	productImageUrl : function(id) {
 		return "http://cdn.alko.fi/ProductImages/Scaled/{id}/product.jpg".replace(/{id}/, id);
+	},
+
+	bindEvents : function() {
+
+		var $productRows = $('.product');
+
+		$productRows.on('click', function() {
+			var id = $(this).attr('id');
+			utils.updateModal(Alko.getProduct(id));
+		});
+
+		$('#search').on('keyup', function() {
+
+			var searchStr = this.value.toLowerCase();
+
+			if (searchStr.length < 3) {
+				$productRows.show();
+			} else {
+				$.each($productRows, function(index, elem) {
+					var $elem = $(elem);
+					var content = $elem.text().toLowerCase();
+					content.indexOf(searchStr) === -1 ? $elem.hide() : $elem.show();
+				});
+			}
+
+		});
 	}
 
 };
@@ -147,28 +174,6 @@ var utils = {
 $(document).ready(function() {
 
 	Alko.init();
-
-	var $productRows = $('.product');
-
-	$productRows.on('click', function() {
-		var id = $(this).attr('id');
-		utils.updateModal(Alko.getProduct(id));
-	});
-
-	$('#search').on('keyup', function() {
-
-		var searchStr = this.value.toLowerCase();
-
-		if (searchStr.length < 3) {
-			$productRows.show();
-		} else {
-			$.each($productRows, function(index, elem) {
-				var $elem = $(elem);
-				var content = $elem.text().toLowerCase();
-				content.indexOf(searchStr) === -1 ? $elem.hide() : $elem.show();
-			});
-		}
-
-	});
+	utils.bindEvents();
 
 });
