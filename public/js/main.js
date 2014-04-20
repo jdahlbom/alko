@@ -6,9 +6,7 @@ var Alko = {
 	init : function() {
 
 		if (this.dataValid() !== true) {
-			this.updateLocalStorage(function(data) {
-				this.fillTable(data);
-			});
+			this.updateLocalStorage();
 		} else {
 			this.fillTable(JSON.parse(localStorage.getItem(productKey)));
 		}
@@ -43,7 +41,8 @@ var Alko = {
 
 	updateLocalStorage : function(callback) {
 
-		var timeStamp = new Date().getTime() + (7 * 24 * 60 * 1000);
+		var self = this;
+		var timeStamp = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
 
 		$.ajax({
 			url: '/tuotteet'
@@ -54,6 +53,8 @@ var Alko = {
 
 			if(typeof callback !== "undefined") {
 				callback(data);
+			} else {
+				self.fillTable(JSON.parse(data));
 			}
 
 		});
@@ -130,7 +131,7 @@ var utils = {
 		$modal.find('.cork').text(product.Suljentatyyppi);
 		$modal.find('#product-image').attr('src', this.productImageUrl(product.Numero));
 		$modal.find('#product-description').text(product.Luonnehdinta);
-		$modal.find('.product-price').text(product.Hinta);
+		$modal.find('.product-price').text(product.Hinta + ' €');
 		$modal.find('.product-metrics').text(metrics);
 		$modal.find('.product-type').text(product.Tyyppi);
 		$modal.find('.product-area').text(area);
