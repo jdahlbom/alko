@@ -151,7 +151,14 @@ var utils = {
 		$productRows.on('click', function() {
 			var id = $(this).attr('id');
 			utils.updateModal(Alko.getProduct(id));
-			_gaq.push(['_trackEvent', 'Tuotteet', 'Click', id]);
+
+			ga('send', {
+			  'hitType': 'click',          // Required.
+			  'eventCategory': 'Products',   // Required.
+			  'eventAction': 'product',      // Required.
+			  'eventLabel': id,
+			  'eventValue': id
+			});
 		});
 
 		$('#search').on('keyup', function() {
@@ -179,23 +186,12 @@ $(document).ready(function() {
 	utils.bindEvents();
 
 	$(window).on('error', function(event) {
-	    _gaq.push([
-	        '_trackEvent',
-	        'JS Error',
-	        event.message,
-	        event.filename + ': ' + event.lineno,
-	        true
-	    ]);
-	});
-
-	// ajax errors with jquery
-	$(document).ajaxError(function(event, request, settings, error) {
-	    _gaq.push([
-	        '_trackEvent',
-	        'Ajax error',
-	        settings.url,
-	        event.result,
-	        true
-	    ]);
+		ga('send', {
+		  'hitType': 'event',          // Required.
+		  'eventCategory': 'JS Error',   // Required.
+		  'eventAction': 'error',      // Required.
+		  'eventLabel': 'JS error',
+		  'eventValue': event.message + '. On: ' + event.filename + ': ' + event.lineno
+		});
 	});
 });
