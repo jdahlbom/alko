@@ -1,7 +1,6 @@
 lib-cov
 *.seed
 *.log
-*.csv
 *.dat
 *.out
 *.pid
@@ -13,6 +12,3 @@ results
  
 node_modules
 npm-debug.log
-
-alko.csv
-alko.txt

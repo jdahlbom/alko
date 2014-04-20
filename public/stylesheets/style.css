@@ -1,3 +1,15 @@
 .product-image {
 	float: right;
 }
+
+.product {
+	cursor: pointer;
+}
+
+.search-form {
+	padding: 20px;
+}
+
+.table thead {
+	font-weight: bold;
+}

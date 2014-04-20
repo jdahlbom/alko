@@ -147,11 +147,27 @@ $(document).ready(function() {
 
 	Alko.init();
 
-	$('#results-table').tablesorter();
+	var $productRows = $('.product');
 
-	$('.product').on('click', function() {
+	$productRows.on('click', function() {
 		var id = $(this).attr('id');
 		utils.updateModal(Alko.getProduct(id));
+	});
+
+	$('#search').on('keyup', function() {
+
+		var searchStr = this.value.toLowerCase();
+
+		if (searchStr.length < 3) {
+			$productRows.show();
+		} else {
+			$.each($productRows, function(index, elem) {
+				var $elem = $(elem);
+				var content = $elem.text().toLowerCase();
+				content.indexOf(searchStr) === -1 ? $elem.hide() : $elem.show();
+			});
+		}
+
 	});
 
 });

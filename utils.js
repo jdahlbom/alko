@@ -1,12 +1,11 @@
 var csv = require('fast-csv');
 var http = require('http');
 var readline = require('readline');
-var stream = require ('stream');
 var fs = require('fs');
 
 var getProducts = function(callback) {
 
-	var txtFile = fs.createWriteStream('alko.txt');
+	var txtFile = fs.createWriteStream('tmp/alko.txt');
 	var products = [];
 
 	var req = http.get('http://www.alko.fi/PageFiles/5634/fi/Alkon%20hinnasto%20tekstitiedostona.txt', function(res) {
@@ -20,8 +19,8 @@ var getProducts = function(callback) {
 			txtFile.on('finish', function() {
 
 				var index = 0;
-				var input = fs.createReadStream('alko.txt');
-				var output = fs.createWriteStream('alko.csv');
+				var input = fs.createReadStream('tmp/alko.txt');
+				var output = fs.createWriteStream('tmp/alko.csv');
 				var rl = readline.createInterface(input, output);
 
 				// remove the couple first lines of text as well as quotation marks
@@ -38,7 +37,7 @@ var getProducts = function(callback) {
 					output.end();
 
 					output.on('finish', function() {
-						csv.fromPath('alko.csv', {
+						csv.fromPath('tmp/alko.csv', {
 							headers : true, 
 							delimiter : '\t'
 						}).on('record', function(data) {
@@ -46,7 +45,6 @@ var getProducts = function(callback) {
 						}).on('error', function(err) {
 							console.log(err);
 						}).on('end', function() {
-							console.log('Lines: ' + products.length);
 							callback(products);
 						});
 					});
