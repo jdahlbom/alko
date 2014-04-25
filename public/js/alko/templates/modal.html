@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" ng-click="close()" class="close"> &times; </button>
+			<h4>{{product.Nimi}}</h4>
+		</div>
+		<div class="modal-body">
+			<img id="product-image" class="img-thumbnail product-image" src="{{product.img}}" />
+
+			<p>{{product.Luonnehdinta}}</p>
+
+			<p class="lead">{{product.Hinta}} €</p>
+			<p>{{product.Tyyppi}}</p>
+			<p></p>
+			<p></p>
+		</div>
+		<div class="clearfix"></div>
+		<div class="modal-footer">
+			<button type="button" ng-click="close()" class="btn btn-default">Sulje</button>
+		</div>
+	</div>
+</div>

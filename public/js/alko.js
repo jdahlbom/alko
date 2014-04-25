@@ -143,7 +143,7 @@ var utils = {
 		return "http://cdn.alko.fi/ProductImages/Scaled/{id}/product.jpg".replace(/{id}/, id);
 	},
 
-	bindEvents : function() {
+	/*bindEvents : function() {
 
 		var $productRows = $('.product');
 
@@ -176,14 +176,14 @@ var utils = {
 			}
 
 		});
-	}
+	}*/
 
 };
 
 $(document).ready(function() {
 
-	Alko.init();
-	utils.bindEvents();
+	//Alko.init();
+	//utils.bindEvents();
 
 	$(window).on('error', function(event) {
 		ga('send', {

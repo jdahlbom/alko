@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 
 app.get('/tuotteet', function(req, res) {
 	utils.getProducts(function(products) {
-	 	res.json( JSON.stringify(products) );		
+	 	res.json(products);		
 	});
 });
 
