@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.5.1",
     "jade": "*",
-    "fast-csv": "0.2.*"
+    "fast-csv": "0.2.*",
+    "connect": "~2.14.5"
   }
 }
