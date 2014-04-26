@@ -7,6 +7,8 @@ app.controller('MainController', function($scope, $http, $modal, $q, $filter, ng
 
 	$scope.init = function() {
 
+		$('.loader').show();
+		
 		if (dataValid() !== true) {
 			updateLocalStorage();
 		} else {
@@ -73,6 +75,8 @@ app.controller('MainController', function($scope, $http, $modal, $q, $filter, ng
 	  			$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 	  		}
 	  	});
+
+	  	$('.loader').hide();
   	};
 
 	var updateLocalStorage = function() {
@@ -87,6 +91,7 @@ app.controller('MainController', function($scope, $http, $modal, $q, $filter, ng
 			setScopeItems();
 
 		}).error(function(err) {
+			$('.loader').hide();
 			console.log(err);
 		});
 
