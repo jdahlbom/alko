@@ -1,30 +1,17 @@
-app.controller('MainController', function($scope, $http, $modal) {
+app.controller('MainController', function($scope, $http, $modal, $q, $filter, ngTableParams) {
 
 	var productKey = 'alko_products';
 	var timeKey = 'alko_timestamp';
+	var availableTypes = [];
 
-	$scope.products = [];
-	$scope.filterText = null;
-	$scope.typeFilter = null;
-	$scope.availableTypes = [];
-	$scope.orderByField = null;
-  	$scope.reverseSort = false;
 
 	$scope.init = function() {
 
 		if (dataValid() !== true) {
 			updateLocalStorage();
 		} else {
-			$scope.products = JSON.parse(localStorage.getItem(productKey));
-
-			angular.forEach($scope.products, function(p, i) {
-				if ($scope.availableTypes.indexOf(p.Tyyppi) === -1) {
-					$scope.availableTypes.push(p.Tyyppi);
-				}
-			});
+			setScopeItems();
 		}
-
-
 
 	};
 
@@ -43,6 +30,51 @@ app.controller('MainController', function($scope, $http, $modal) {
 		});
 	};
 
+	$scope.getAvailableTypes = function() {
+		var def = $q.defer();
+		var arr = [];
+		angular.forEach(availableTypes, function(type, index) {
+			arr.push({
+				'id': type,
+				'title': type
+			});
+		});
+		def.resolve(arr);
+		return def;
+	};
+
+  	var setScopeItems = function() {
+
+		var productArray = JSON.parse(localStorage.getItem(productKey));
+
+		angular.forEach(productArray, function(p, i) {
+			if (availableTypes.indexOf(p.Tyyppi) === -1) {
+				availableTypes.push(p.Tyyppi);
+			}
+		});
+
+		$scope.tableParams = new ngTableParams({
+	  		page: 1,
+	  		count: 50,
+	  		sorting: {
+	  			Tyyppi: 'asc'
+	  		}
+	  	}, {
+	  		counts: [],
+	  		getData: function($defer, params) {
+	  			
+	  			// filter
+	  			var orderedData = params.filter() ? $filter('filter')(productArray, params.filter()) : productArray;
+
+	  			// sorting	
+	  			orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+
+	  			params.total(orderedData.length);
+	  			$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+	  		}
+	  	});
+  	};
+
 	var updateLocalStorage = function() {
 
 		var timeStamp = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
@@ -52,14 +84,7 @@ app.controller('MainController', function($scope, $http, $modal) {
 			localStorage.setItem(timeKey, JSON.stringify(timeStamp));
 			localStorage.setItem(productKey, JSON.stringify(data));
 			
-			angular.forEach(data, function(product, index) {
-				
-				if ($scope.availableTypes.indexOf(product.Tyyppi) === -1) {
-					$scope.availableTypes.push(product.Tyyppi);
-				}
-
-				$scope.products.push(product);
-			});
+			setScopeItems();
 
 		}).error(function(err) {
 			console.log(err);
@@ -86,22 +111,3 @@ var ModalInstanceController = function($scope, $modalInstance, product) {
 	};
 
 };
-
-
-app.filter('isType', function() {
-
-	return function(input, type) {
-		if( typeof type == 'undefined' || type == null || type == '') {
-			return input;
-		} else {
-			var out = [];
-			for (var i in input) {
-				if (input[i].Tyyppi === type) {
-					out.push(input[i]);
-				}
-			}
-			return out;
-		}
-	}
-
-});

@@ -4,15 +4,34 @@
 			<button type="button" ng-click="close()" class="close"> &times; </button>
 			<h4>{{product.Nimi}}</h4>
 		</div>
-		<div class="modal-body">
-			<img id="product-image" class="img-thumbnail product-image" src="{{product.img}}" />
 
-			<p>{{product.Luonnehdinta}}</p>
+		<div ng-if="product.Valikoima == 'erikoisvalikoima'" class="special ribbon ribbon-red">
+			<div class="banner">
+				<div class="text">erikoisvalikoima!</div>
+			</div>
+		</div>
+
+		<div class="modal-body">
+			<img class="img-thumbnail product-image" src="{{product.img}}" />
+
+			<p style="font-style: italic;">{{product.Luonnehdinta}}</p>
+			<p class="small" ng-if="product.Huomautus != ''">{{product.Huomautus}}</p>
 
 			<p class="lead">{{product.Hinta}} €</p>
-			<p>{{product.Tyyppi}}</p>
-			<p></p>
-			<p></p>
+			<p class="small">{{product.Pullokoko}} l / {{product.Litrahinta}} €/l
+
+			<p ng-if="product.Vuosikerta != ''">Vuosikerta: {{product.Vuosikerta}}</p>
+			
+			<dl class="dl-horizontal">
+				<dt>Tuotenumero:</dt>
+				<dd>{{product.Numero}}</dd>
+				<dt>Valmistusmaa:</dt>
+				<dd>{{product.Valmistusmaa}} {{product.Alue}}</dt>
+				<dt>Pakkaus:</dt>
+				<dd>{{product.Pakkaustyyppi}}</dd>
+				<dt>Suljenta:</dt>
+				<dd>{{product.Suljentatyyppi}}</dd>
+			</dl>
 		</div>
 		<div class="clearfix"></div>
 		<div class="modal-footer">

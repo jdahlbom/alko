@@ -1,1 +1,1 @@
-var app = angular.module('alko', ['ui.bootstrap']);
+var app = angular.module('alko', ['ui.bootstrap', 'ngTable']);
