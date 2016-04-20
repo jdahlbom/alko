@@ -6,9 +6,10 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "htmlparser2": "3.9.0",
     "express": "3.5.1",
     "jade": "*",
-    "fast-csv": "0.2.*",
+    "fast-csv": "1.1.0",
     "connect": "~2.14.5"
   }
 }

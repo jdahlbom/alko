@@ -11,4 +11,5 @@ logs
 results
  
 node_modules
-npm-debug.log
+*.iml
+.idea
